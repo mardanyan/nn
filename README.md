@@ -1,2 +1,2 @@
 # Homework 1 (keras dataset test)
-https://github.com/mrde00/nn/homework1
+[Homework 1](https://github.com/mrde00/nn/tree/master/homework1)
