@@ -24,8 +24,8 @@ num_classes = 10
 epochs = 3
 
 # the data, split between train and test sets
-(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
-#(x_train, y_train), (x_test, y_test) = mnist.load_data()
+# (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 
 plt.show(x_train[0])
