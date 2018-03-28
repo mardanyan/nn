@@ -2,7 +2,7 @@ from .layer import Layer
 import collections
 
 class Dense(Layer):
-    counter = 0
+    counter = 1
 
     def __initializer(self, units,
                  activation=None,
@@ -32,7 +32,8 @@ class Dense(Layer):
 
         pass
 
-    def __init__(self, line):
+    def __init__(self, line, **kwargs):
+        super(Dense, self).__init__(**kwargs)
         self.name = "dense_%d" % Dense.counter
         Dense.counter += 1
 

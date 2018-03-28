@@ -5,8 +5,7 @@ from nnparser import Sequential
 print("----real output----")
 real_example()
 
-code1 = '''
-    #dreci menj@ henc
+code1 = '''    
     #num_classes = 10
     img_rows, img_cols = 28, 28
     input_shape = (img_rows, img_cols, 1)

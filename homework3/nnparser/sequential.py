@@ -31,11 +31,16 @@ class Sequential:
         # to_display = ['Layer (type)', 'Output Shape', 'Param #']
         print("Layer(type)\t\t\t\t\tOutput Shape\t\t\tParam  #")
 
+        totalParams = 0
+        trainableParams = 0
         for layer in self.layers:
+            totalParams += layer.getParams()
+            trainableParams += layer.getTrainableParams()
             layer.summary()
 
+
         print("=" * 65)
-        print("Total params: %d" % 1,199,882)
-        print("Trainable params: %d" % 1,199,882)
-        print("Non - trainable params: %d" % 0)
+        print("Total params: %d" % totalParams)
+        print("Trainable params: %d" % trainableParams)
+        print("Non - trainable params: %d" % (totalParams - trainableParams))
         print("_" * 65)
