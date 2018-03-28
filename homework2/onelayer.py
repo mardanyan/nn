@@ -4,30 +4,24 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-class nn:
+class NeuralNetwork:
     def __init__(self):
-        (self.x_train_orig, self.y_train), (self.x_test, self.y_test) = mnist.load_data()
+        # Assign random weights to a 3 x 1 matrix,
+        self.synaptic_weights = 2 * np.random.random((10, 784)) - 1
+        # self.w = np.random.randn(10, 784)
 
-        print("x_train shape %s" % (self.x_train_orig.shape,))
-        print("x_test shape %s" % (self.x_test.shape,))
-
-        self.x_train = self.x_train_orig.reshape(60000, 784)
-        self.x_test = self.x_test.reshape(10000, 784)
-        self.x_train = self.x_train.astype('float32')
-        self.x_test = self.x_test.astype('float32')
-        self.x_train /= 255
-        self.x_test /= 255
-
-        self.w = np.random.randn(10, 784)
-        print("w shape %s" % (self.w.shape,))
-        print("w row0 %s" % self.w[0, 0:10])
         self.alpha = 0.001
+        self.epoch = 100
 
     def showImage(self, index):
         plt.imshow(self.x_train_orig[index])
         plt.colorbar()
         # plt.title('plot for image ")
         plt.show()
+
+    # The Sigmoid function
+    def __sigmoid(self, x):
+        return 1 / (1 + np.exp(-x))
 
     def softmax(d):
         d = d - np.max(d)
@@ -36,7 +30,7 @@ class nn:
         return exp / summ
 
     def dense(self, index):
-        return self.w.dot(self.x_train[index])
+        return self.synaptic_weights.dot(self.x_train[index])
 
     # def loss(self, index):
     #     return -np.log(self.y_train[index])
@@ -53,7 +47,7 @@ class nn:
         return np.outer(self.x_train[index], yaliq)
 
     def update(self, gradient):
-        self.w = self.w - self.alpha * gradient.T
+        self.synaptic_weights = self.synaptic_weights - self.alpha * gradient.T
 
     def epoche(self):
 
@@ -61,7 +55,7 @@ class nn:
             denseValue = self.dense(index)
 
             # calc softmax
-            softMax = nn.softmax(denseValue)
+            softMax = NeuralNetwork.softmax(denseValue)
 
             # calc loss
             # lossValue = self.loss(index)
@@ -71,17 +65,49 @@ class nn:
 
             self.update(gradientValue)
 
-    def run(self):
-        self.epoche()
+    def train(self, x_train, y_train, x_test, y_test):
+        self.x_train_orig = x_train
+        self.y_train = y_train
+        self.x_test = x_test
+        self.y_test = y_test
+
+        self.x_train = self.x_train_orig.reshape(60000, 784)
+        self.x_test = self.x_test.reshape(10000, 784)
+        self.x_train = self.x_train.astype('float32')
+        self.x_test = self.x_test.astype('float32')
+        self.x_train /= 255
+        self.x_test /= 255
+
+        print("x_train shape %s" % (self.x_train_orig.shape,))
+        print("x_test shape %s" % (self.x_test.shape,))
+
+        print("w shape %s" % (self.synaptic_weights.shape,))
+        print("w row0 %s" % self.synaptic_weights[0, 0:10])
+
+        for iteration in range(self.epoch):
+            # Pass the training set through the network.
+            output = self.learn(self.x_train)
+
+            # Calculate the error
+            # error = outputs - output
+
+    # The neural network thinks.
+    def learn(self, inputs):
+        return self.__sigmoid(np.dot(inputs, self.synaptic_weights))
+
+        # self.epoche()
 
     def printResult(self):
         print()
 
 
 if __name__ == "__main__":
-    n = nn()
+    nn = NeuralNetwork()
+
     # n.showImage(1)
-    n.run()
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    nn.train(x_train, y_train, x_test, y_test)
 
 
 
