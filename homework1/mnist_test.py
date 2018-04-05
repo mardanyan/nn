@@ -37,6 +37,8 @@ print(y_train.shape)
 # print(y_test.shape)
 
 x_train = x_train.reshape(60000, 784)
+x_train = x_train[:10000]
+y_train = y_train[:10000]
 x_test = x_test.reshape(10000, 784)
 
 
@@ -99,8 +101,8 @@ history = model.fit(x_train, y_train,
 
 score = model.evaluate(x_test, y_test, verbose=0)
 
-print('Test loss:', score[0])
-print('Test accuracy:', score[1])
+# print('Test loss:', score[0])
+# print('Test accuracy:', score[1])
 
 # print(y_train[:10])
 

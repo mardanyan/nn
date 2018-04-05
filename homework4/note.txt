@@ -1,0 +1,3 @@
+#homework description
+
+try to draw histogram for one neuron

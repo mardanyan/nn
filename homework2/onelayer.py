@@ -32,8 +32,8 @@ class NeuralNetwork:
     def dense(self, index):
         return self.synaptic_weights.dot(self.x_train[index])
 
-    # def loss(self, index):
-    #     return -np.log(self.y_train[index])
+    def loss(self, index):
+        return -np.log(self.y_train[index])
 
     def gradient(self, index, softMax):
         # los-i acancjal@ @st Y~

@@ -1,0 +1,3 @@
+#homework description
+
+try to represent params count via parsing the code
